@@ -6,6 +6,10 @@ import {
   readAllRecords,
   updateRecord,
 } from "../../database";
+import Cors from 'micro-cors';
+
+
+const cors = Cors();
 
 const typeDefs = gql`
   type DataPoint {
@@ -73,9 +77,9 @@ const resolvers = {
   },
 };
 
-// const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers });
 
-// const handler = server.createHandler({ path: "/api/graphql-data" });
+const serverStarter = server.start();
 
 export const config = {
   api: {
@@ -83,9 +87,19 @@ export const config = {
   },
 };
 
-// export default handler;
-const server = new ApolloServer({ typeDefs, resolvers });
+async function handler(req,res){
+  await serverStarter;
 
-module.exports = server.start().then(() => {
-  return server.createHandler({ path: "/api/graphql-data" });
+  await server.createHandler({ path: "/api/graphql-data" })(req,res);
+}
+
+
+
+export default  cors((req, res) => {
+  if (req.method === 'OPTIONS') {
+    res.end();
+    return false;
+  }
+
+  return handler(req, res);
 });

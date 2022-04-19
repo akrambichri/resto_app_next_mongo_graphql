@@ -1,10 +1,16 @@
+import Head from "next/head";
+import Image from "next/image";
+import Featured from "../components/Featured";
+import PizzaList from "../components/PizzaList";
+import styles from "../styles/Home.module.css";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   useQuery,
-  gql
+  gql,
 } from "@apollo/client";
+
 import { App } from "../components";
 
 const Home = ({ host, protocol }) => {
@@ -12,12 +18,18 @@ const Home = ({ host, protocol }) => {
 
   const client = new ApolloClient({
     uri,
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
   });
 
   return (
     <ApolloProvider client={client}>
-      <App />
+      <Head>
+        <title>Pizza Restaurant in Newyork</title>
+        <meta name="description" content="Best pizza shop in town" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Featured />
+      <PizzaList />
     </ApolloProvider>
   );
 };

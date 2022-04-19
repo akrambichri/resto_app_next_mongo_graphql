@@ -25,12 +25,5 @@ I used Next.JS in this application for Static Rendering and general ease of use 
 
 For the API layer, I used GraphQL with Apollo, because I believe it is a much better solution than REST.
 
-The database being used is Mongo. I decided not to use an ORM because that was overkill, and I'm kinda on the fence re ORM's.
-
 A Docker container is created for both the Next.JS app and the Mongo database, and networking is set up so that the app can query the DB.
 
-## Come and say Hi! 😃
-
-You can reach me on LinkedIn at following link:
-
-https://www.linkedin.com/in/bengrunfeld/
