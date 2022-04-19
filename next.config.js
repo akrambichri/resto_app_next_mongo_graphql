@@ -1,5 +1,6 @@
 module.exports = {
-  experimental: {
-    outputStandalone: true,
+  env: {
+    DB_NAME: "points",
+    COL_NAME: "dataPoints",
   },
-}
+};

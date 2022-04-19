@@ -1,73 +1,36 @@
-# With Docker
+# Docker with MongoDB
 
-This examples shows how to use Docker with Next.js based on the [deployment documentation](https://nextjs.org/docs/deployment#docker-image). Additionally, it contains instructions for deploying to Google Cloud Run. However, you can use any container-based deployment host.
+This is an example app to show you how to implement Docker with MongoDB and NextJS.
 
-## How to use
+## Usage
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+Clone the repo and run the following commands:
 
-```bash
-npx create-next-app --example with-docker nextjs-docker
-# or
-yarn create next-app --example with-docker nextjs-docker
-# or
-pnpm create next-app -- --example with-docker nextjs-docker
-```
+    npm install
+    docker-compose up -d
 
-## Using Docker
+Once you're done, run the following:
 
-1. [Install Docker](https://docs.docker.com/get-docker/) on your machine.
-1. Build your container: `docker build -t nextjs-docker .`.
-1. Run your container: `docker run -p 3000:3000 nextjs-docker`.
+    docker-compose down
 
-You can view your images created with `docker images`.
+Then navigate to `localhost:3000` in your browser.
 
-### In existing projects
+This app is a basic note taking app that only allows numbers as an input. To create a new record, click on the empty input box at the bottom.
 
-To add support for Docker to an existing project, just copy the `Dockerfile` into the root of the project and add the following to the `next.config.js` file:
+To execute a Create or an Update, write the new value in the input box and then click out of it. The loss of focus will fire an event that will
 
-```js
-// next.config.js
-module.exports = {
-  // ... rest of the configuration.
-  experimental: {
-    outputStandalone: true,
-  },
-}
-```
+## Architecture and Design Notes
 
-This will build the project as a standalone app inside the Docker image.
+I used Next.JS in this application for Static Rendering and general ease of use - their API Routes feature is amazing and simple.
 
-## Deploying to Google Cloud Run
+For the API layer, I used GraphQL with Apollo, because I believe it is a much better solution than REST.
 
-1. Install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) so you can use `gcloud` on the command line.
-1. Run `gcloud auth login` to log in to your account.
-1. [Create a new project](https://cloud.google.com/run/docs/quickstarts/build-and-deploy) in Google Cloud Run (e.g. `nextjs-docker`). Ensure billing is turned on.
-1. Build your container image using Cloud Build: `gcloud builds submit --tag gcr.io/PROJECT-ID/helloworld --project PROJECT-ID`. This will also enable Cloud Build for your project.
-1. Deploy to Cloud Run: `gcloud run deploy --image gcr.io/PROJECT-ID/helloworld --project PROJECT-ID --platform managed`. Choose a region of your choice.
+The database being used is Mongo. I decided not to use an ORM because that was overkill, and I'm kinda on the fence re ORM's.
 
-   - You will be prompted for the service name: press Enter to accept the default name, `helloworld`.
-   - You will be prompted for [region](https://cloud.google.com/run/docs/quickstarts/build-and-deploy#follow-cloud-run): select the region of your choice, for example `us-central1`.
-   - You will be prompted to **allow unauthenticated invocations**: respond `y`.
+A Docker container is created for both the Next.JS app and the Mongo database, and networking is set up so that the app can query the DB.
 
-Or click the button below, authorize the script, and select the project and region when prompted:
+## Come and say Hi! 😃
 
-[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/vercel/next.js.git&dir=examples/with-docker)
+You can reach me on LinkedIn at following link:
 
-## Running Locally
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+https://www.linkedin.com/in/bengrunfeld/
