@@ -8,7 +8,6 @@ ENV DB_NAME points
 ENV COL_NAME dataPoints
 
 
-RUN npm install -D @swc/cli @swc/core
 RUN npm install
 
 

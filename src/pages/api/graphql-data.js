@@ -5,7 +5,7 @@ import {
   deleteRecord,
   readAllRecords,
   updateRecord,
-} from "../../database";
+} from "../../../database";
 import Cors from 'micro-cors';
 
 

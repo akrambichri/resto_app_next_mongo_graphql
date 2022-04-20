@@ -1,10 +1,22 @@
 import Head from "next/head";
 import App from "next/app";
-import { ThemeProvider } from "styled-components";
+import "../../styles/globals.css";
 
-import { theme } from "../theme";
-import "../theme/globalStyles.css";
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+`
+
+const theme = {
+  colors: {
+    primary: '#0070f3',
+  },
+}
 export default class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
@@ -20,8 +32,10 @@ export default class MyApp extends App {
             name="viewport"
             content="width=device-width, initial-scale=1, maximum-scale=1"
           />
+          <title>Pizza Restaurant in Newyork</title>
         </Head>
 
+        <GlobalStyle />
         <ThemeProvider theme={theme}>
           <Component {...pageProps} />
         </ThemeProvider>

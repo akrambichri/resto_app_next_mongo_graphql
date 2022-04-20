@@ -1,8 +1,3 @@
-import Head from "next/head";
-import Image from "next/image";
-import Featured from "../components/Featured";
-import PizzaList from "../components/PizzaList";
-import styles from "../styles/Home.module.css";
 import {
   ApolloClient,
   InMemoryCache,
@@ -23,13 +18,7 @@ const Home = ({ host, protocol }) => {
 
   return (
     <ApolloProvider client={client}>
-      <Head>
-        <title>Pizza Restaurant in Newyork</title>
-        <meta name="description" content="Best pizza shop in town" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Featured />
-      <PizzaList />
+      <App />
     </ApolloProvider>
   );
 };
